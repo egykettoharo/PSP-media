@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::any('/api',              'TryController@api');
+
+//Route::get('/', function () {
+//    return view('welcome');
+//});

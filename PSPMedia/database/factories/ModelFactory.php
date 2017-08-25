@@ -1,5 +1,14 @@
 <?php
 
+
+$genders = [
+    'male', 'female'
+];
+
+$countries = [
+    "Germany", "Greece", "Greenland", "Hungary", "Iceland", "India", "Indonesia", "Luxembourg", "Mexico", "Romania"
+];
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -11,14 +20,32 @@
 |
 */
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+$factory->define(App\Http\Models\CustomerModel::class, function (Faker\Generator $faker) use ($genders, $countries) {
+    return [
+        'first_name'        => $faker->firstName,
+        'last_name'         => $faker->lastName,
+        'email'             => $faker->unique()->safeEmail,
+        'country'           => $faker->randomElement($countries),
+        'gender'            => $faker->randomElement($genders),
+        'bonus'             => rand(5, 20),
+    ];
+});
+
+$factory->define(App\Http\Models\DepositModel::class, function (Faker\Generator $faker) {
+    $amount = rand(1, 999);
+    $bonus  = $amount / 10;
+    return [
+        'real_amount'          => $amount,
+        'bonus_amount'         => $bonus,
+        'created_at'        => \Carbon\Carbon::now()->subDays(rand(0, 7))
+    ];
+});
+
+$factory->define(App\Http\Models\WithdrawModel::class, function (Faker\Generator $faker) {
+    $amount = rand(1, 999);
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'amount'            => $amount,
+        'created_at'        => \Carbon\Carbon::now()->subDays(rand(0, 7))
     ];
 });

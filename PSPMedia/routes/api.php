@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/customer/create',     'CustomerController@create');
+Route::post('/customer/edit',       'CustomerController@edit');
+Route::post('/deposit/add',         'CustomerController@addDeposit');
+Route::post('/withdraw/add',        'CustomerController@addWithdraw');
+Route::get('/report',               'CustomerController@report');
+//Route::middleware('auth:api')->get('/user', function () {
+//    var_dump('asdsadad');
+//});
