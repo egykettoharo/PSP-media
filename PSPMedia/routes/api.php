@@ -13,11 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
+// Creates a customer
 Route::post('/customer/create',     'CustomerController@create');
+// Edit a specified customer
 Route::post('/customer/edit',       'CustomerController@edit');
+// Add deposit to a customer
 Route::post('/deposit/add',         'CustomerController@addDeposit');
+// Add withdraw to a customer
 Route::post('/withdraw/add',        'CustomerController@addWithdraw');
+// Creates a report by from - to values
 Route::get('/report',               'CustomerController@report');
-//Route::middleware('auth:api')->get('/user', function () {
-//    var_dump('asdsadad');
-//});
